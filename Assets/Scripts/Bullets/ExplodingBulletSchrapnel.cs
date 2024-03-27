@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ExplodingBulletSchrapnel : Bullet
 {
-    public GameObject bulletPrefab;
+    public GameObject firstEnemy;
 
     public override void OnMove()
     {
@@ -13,8 +13,11 @@ public class ExplodingBulletSchrapnel : Bullet
 
     public override void OnCollision(GameObject hit)
     {
-        //hit.GetComponent<EntityHealth>().TakeDamage(attackDamage);
-       
-        //Destroy(gameObject, .01f);
+        if(hit != firstEnemy)
+        {
+            hit.GetComponent<EntityHealth>().TakeDamage(attackDamage);
+
+            Destroy(gameObject, .01f);
+        }
     }
 }

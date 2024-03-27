@@ -22,6 +22,7 @@ public class ExplodingBullet : Bullet
             Bullet bullet = Instantiate(bulletPrefab, transform.position, Quaternion.Euler(0, 0, direction)).GetComponent<Bullet>();
             bullet.targetTag = this.targetTag;
             direction += 360f/nbSchrapnel;
+            bullet.gameObject.GetComponent<ExplodingBulletSchrapnel>().firstEnemy = hit;
             EntityManager.instance.bullets.Add(bullet);
         }
         

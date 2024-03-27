@@ -6,8 +6,8 @@ public class PlayerCombat : MonoBehaviour
 {
     [Header("Statistics references")]
     public float attackCooldown;
-    public float bulletSpeed;
-    public int attackDamage;
+    public float bulletSpeedModifier;
+    public int attackDamageModifier;
 
     bool canAttack = true;
 
@@ -45,8 +45,8 @@ public class PlayerCombat : MonoBehaviour
         StartCoroutine(AttackCooldown());
 
         Bullet bullet = Instantiate(bulletPrefab, attackPoint.position, attackPoint.rotation).GetComponent<Bullet>();
-        //bullet.moveSpeed = bulletSpeed;
-        //bullet.attackDamage = attackDamage;
+        bullet.moveSpeed *= bulletSpeedModifier;
+        bullet.attackDamage *= attackDamageModifier;
         bullet.targetTag = targetTag;
 
         EntityManager.instance.bullets.Add(bullet);

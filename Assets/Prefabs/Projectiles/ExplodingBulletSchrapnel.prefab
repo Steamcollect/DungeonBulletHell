@@ -190,6 +190,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 8
-  attackDamage: 0
+  attackDamage: 1
   targetTag: 
   bulletPrefab: {fileID: 0}

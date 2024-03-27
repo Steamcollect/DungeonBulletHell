@@ -10,6 +10,13 @@ public class PlayerXP : MonoBehaviour
 
     public Slider xpSlider;
 
+    PowerUpManager powerUpManager;
+
+    private void Awake()
+    {
+        powerUpManager = FindFirstObjectByType<PowerUpManager>();
+    }
+
     private void Start()
     {
         maxXp = 0.04f * (level ^ 3) + 0.8f * (level ^ 2) + 2 * level;
@@ -33,6 +40,8 @@ public class PlayerXP : MonoBehaviour
             currentXp = 0;
 
             maxXp = 0.04f * (level ^ 3) + 0.8f * (level ^ 2) + 2 * level;
+
+            powerUpManager.SetPowerUpChoices();
 
             xpSlider.maxValue = maxXp;
             xpSlider.value = currentXp;

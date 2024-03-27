@@ -11,7 +11,7 @@ public class PowerUpManager : MonoBehaviour
 
     [Header("Choice UI references")]
     List<PowerUpChoiceUI> choicesUI = new List<PowerUpChoiceUI>();
-    [SerializeField] Transform choiceUiParent;
+    [SerializeField] GameObject choiceUiParent;
     [SerializeField] GameObject choiceUiGO;
 
     private void Start()
@@ -70,12 +70,16 @@ public class PowerUpManager : MonoBehaviour
             currentsPowerUp = new List<PowerUpData>(powerUpAvailable);
             currentsPowerUp.Remove(current);
         }
+
+        choiceUiParent.SetActive(true);
     }
 
     public void SelectPowerUp(PowerUpData powerUp)
     {
         powerUpUtilisationCount[powerUp]++;
         if (powerUp.maxUtilisation <= powerUpUtilisationCount[powerUp]) RemoverPowerUp(powerUp);
+
+        choiceUiParent.SetActive(false);
 
         // Set statistics
     }
@@ -92,7 +96,7 @@ public class PowerUpManager : MonoBehaviour
     }
     void AddPowerUpUI()
     {
-        PowerUpChoiceUI choiceUI = Instantiate(choiceUiGO, choiceUiParent).GetComponent<PowerUpChoiceUI>();
+        PowerUpChoiceUI choiceUI = Instantiate(choiceUiGO, choiceUiParent.transform).GetComponent<PowerUpChoiceUI>();
         choiceUI.powerUpManager = this;
         choicesUI.Add(choiceUI);
     }

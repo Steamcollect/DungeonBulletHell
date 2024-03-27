@@ -45,8 +45,8 @@ public class PlayerCombat : MonoBehaviour
         StartCoroutine(AttackCooldown());
 
         Bullet bullet = Instantiate(bulletPrefab, attackPoint.position, attackPoint.rotation).GetComponent<Bullet>();
-        bullet.moveSpeed = bulletSpeed;
-        bullet.attackDamage = attackDamage;
+        //bullet.moveSpeed = bulletSpeed;
+        //bullet.attackDamage = attackDamage;
         bullet.targetTag = targetTag;
 
         EntityManager.instance.bullets.Add(bullet);

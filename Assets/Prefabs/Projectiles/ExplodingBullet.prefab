@@ -74,8 +74,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -800851501, guid: 863ab494fd63f314d8f9a324306ccad5, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Sprite: {fileID: -505446832, guid: 863ab494fd63f314d8f9a324306ccad5, type: 3}
+  m_Color: {r: 1, g: 0, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -95,7 +95,7 @@ Animator:
   m_GameObject: {fileID: 253158888230461689}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 3652ea50195a130458b6cb13dab422c4, type: 2}
+  m_Controller: {fileID: 9100000, guid: 6e1952824dc99744ead44e458cfce5a8, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -116,10 +116,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8795200350340036404}
-  - component: {fileID: 435891468006190452}
-  - component: {fileID: 6002024064271837000}
+  - component: {fileID: 4179826331618540151}
+  - component: {fileID: 2674890284927780957}
   m_Layer: 0
-  m_Name: BasicPlayerBullet
+  m_Name: ExplodingBullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -141,23 +141,8 @@ Transform:
   - {fileID: 440288249501851694}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &435891468006190452
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9032870074224781599}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bcab7fa0859f2d54c9259f6a941387db, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moveSpeed: 5
-  attackDamage: 2
-  targetTag: 
---- !u!70 &6002024064271837000
-CapsuleCollider2D:
+--- !u!58 &4179826331618540151
+CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -190,6 +175,21 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0.03237553, y: -0.0018634051}
-  m_Size: {x: 0.19207302, y: 0.25226167}
-  m_Direction: 0
+  m_Offset: {x: 0, y: 0}
+  m_Radius: 0.25
+--- !u!114 &2674890284927780957
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9032870074224781599}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 23883b8210b10be459d38ace5219975c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveSpeed: 3
+  attackDamage: 1
+  targetTag: 
+  bulletPrefab: {fileID: 9032870074224781599, guid: a982708a1d6d2aa428090ebdacf8b59c, type: 3}

@@ -1115,7 +1115,7 @@ MonoBehaviour:
   bulletSpeed: 5
   attackDamage: 2
   targetTag: Enemy
-  bulletPrefab: {fileID: 9032870074224781599, guid: ebdb236b4ae08074386b2c3af7d4f0cb, type: 3}
+  bulletPrefab: {fileID: 9032870074224781599, guid: 62f68a7ce5f301f439ce4b92e9f47ee5, type: 3}
   handParent: {fileID: 1452802975}
   attackPoint: {fileID: 418592051}
   handAnim: {fileID: 97349859}
@@ -1695,8 +1695,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   chunkRange: 20
   playerTransform: {fileID: 181236283}
-  enemys:
-  - {fileID: 1820198704}
+  enemys: []
   bullets: []
 --- !u!4 &447668449
 Transform:

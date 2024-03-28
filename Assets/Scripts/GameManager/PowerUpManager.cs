@@ -79,12 +79,22 @@ public class PowerUpManager : MonoBehaviour
         powerUpUtilisationCount[powerUp]++;
         if (powerUp.maxUtilisation <= powerUpUtilisationCount[powerUp]) RemoverPowerUp(powerUp);
 
+        for (int i = 0; i < powerUp.powerUpUnlockable.Length; i++) addPowerUpToList(powerUp.powerUpUnlockable[i]);
+
         choiceUiParent.SetActive(false);
 
         // Set statistics
+        switch (powerUp.powerUpType)
+        {
+            case PowerUpType.Exploding:
+                break;
+
+            default:
+                break;
+        }
     }
 
-    void addPowerUp(PowerUpData powerUp)
+    void addPowerUpToList(PowerUpData powerUp)
     {
         powerUpAvailable.Add(powerUp);
         powerUpUtilisationCount.Add(powerUp, 0);

@@ -20,7 +20,7 @@ public class BasicRangeEnemy : Enemy
     
     public override void OnUpdate()
     {
-        float distanceFromPlayer = Vector2.Distance(transform.position, target.position);
+        float distanceFromPlayer = Vector2.Distance(transform.position, playerTransform.position);
 
         if (distanceFromPlayer < attackRange)
         {
@@ -29,7 +29,7 @@ public class BasicRangeEnemy : Enemy
         }
         else
         {
-            transform.position = Vector2.SmoothDamp(transform.position, target.position, ref velocity, distanceFromPlayer / moveSpeed);
+            transform.position = Vector2.SmoothDamp(transform.position, playerTransform.position, ref velocity, distanceFromPlayer / moveSpeed);
         }
 
         SetHandVisual();
@@ -42,15 +42,15 @@ public class BasicRangeEnemy : Enemy
         Bullet bullet = Instantiate(bulletPrefab, attackPoint.position, attackPoint.rotation).GetComponent<Bullet>();
         bullet.moveSpeed = bulletSpeed;
         bullet.attackDamage = attackDamage;
-        bullet.targetTag = targetTag;
+        bullet.targetTag = playerTransform.tag;
 
-        EntityManager.instance.bullets.Add(bullet);
+        EntityManager.instance.entitys.Add(bullet);
     }
 
 
     void SetHandVisual()
     {
-        lookDir = (Vector2)(target.position - transform.position);
+        lookDir = playerTransform.position - transform.position;
 
         angle = Mathf.Atan2(lookDir.y, lookDir.x) * Mathf.Rad2Deg;
         handParent.rotation = Quaternion.Euler(0, 0, angle);

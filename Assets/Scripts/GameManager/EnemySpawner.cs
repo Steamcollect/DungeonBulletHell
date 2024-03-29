@@ -43,10 +43,14 @@ public class EnemySpawner : MonoBehaviour
 
     void SpawnEnemy(EnemyData enemy)
     {
+        Enemy current = Instantiate(enemy.enemyPrefabs).GetComponent<Enemy>();
+
+        current.playerTransform = playerTransform;
+
         Vector2 randomPointAroundPlayer = (Vector2)playerTransform.position + (Random.insideUnitCircle.normalized * spawningRadius);
-        GameObject current = Instantiate(enemy.enemyPrefabs);
         current.transform.position = randomPointAroundPlayer;
-        entityManager.enemys.Add(current.GetComponent<Enemy>());
+                
+        entityManager.entitys.Add(current);
     }
 
     private void OnDrawGizmosSelected()

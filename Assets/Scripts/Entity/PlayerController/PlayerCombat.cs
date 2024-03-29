@@ -49,7 +49,7 @@ public class PlayerCombat : MonoBehaviour
         bullet.attackDamage = attackDamage;
         bullet.targetTag = targetTag;
 
-        EntityManager.instance.bullets.Add(bullet);
+        EntityManager.instance.entitys.Add(bullet);
 
         // Hand animation
         int rnd = Random.Range(0, 2);

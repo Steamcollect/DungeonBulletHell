@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BasicBullet : Bullet
 {
-    public override void OnMove()
+    public override void OnUpdate()
     {
         transform.position = transform.position + transform.up * moveSpeed * Time.deltaTime;
     }

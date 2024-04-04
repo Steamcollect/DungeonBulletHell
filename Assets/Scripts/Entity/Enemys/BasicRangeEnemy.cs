@@ -40,6 +40,10 @@ public class BasicRangeEnemy : Enemy
         StartCoroutine(AttackCooldown());
 
         Bullet bullet = Instantiate(bulletPrefab, attackPoint.position, attackPoint.rotation).GetComponent<Bullet>();
+        
+        bullet.playerTransform = playerTransform;
+        bullet.chunkRange = EntityManager.instance.chunkRange;
+
         bullet.moveSpeed = bulletSpeed;
         bullet.attackDamage = attackDamage;
         bullet.targetTag = playerTransform.tag;

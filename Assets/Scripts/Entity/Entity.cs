@@ -4,7 +4,7 @@ using UnityEngine;
 
 public abstract class Entity : MonoBehaviour
 {
-    [HideInInspector] public Transform playerTransform;
+    public Transform playerTransform;
     [HideInInspector] public float chunkRange;
 
     public abstract void OnUpdate();

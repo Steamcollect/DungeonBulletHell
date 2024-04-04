@@ -12,7 +12,11 @@ public abstract class Bullet : Entity
     public override void OnUpdate()
     {
         if (Vector2.Distance(transform.position, playerTransform.position) > chunkRange) Destroy(gameObject);
+
+        OnMove();
     }
+
+    public abstract void OnMove();
 
     private void OnTriggerEnter2D(Collider2D collision)
     {

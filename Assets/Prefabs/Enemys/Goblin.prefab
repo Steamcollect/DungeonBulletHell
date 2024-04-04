@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 1434355573015953679}
   - component: {fileID: 7189736355723791722}
   - component: {fileID: 5385305525384052022}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Goblin
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -165,12 +165,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15a3c2e60ed9d7442a99c3881ebae35f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerTransform: {fileID: 0}
+  chunkRange: 0
   attackDamage: 2
   moveSpeed: 3
   attackCooldown: 1
-  targetTag: Player
   canAttack: 1
-  target: {fileID: 0}
   bulletSpeed: 5
   attackPoint: {fileID: 7244537912444336096}
   bulletPrefab: {fileID: 9032870074224781599, guid: 072105b36641c044da1d90b11a187d46, type: 3}

@@ -150,8 +150,8 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: -0.503037}
-  m_Size: {x: 0.51010156, y: 0.77639675}
+  m_Offset: {x: 0, y: 0.059319347}
+  m_Size: {x: 0.51010156, y: 0.75227684}
   m_Direction: 0
 --- !u!114 &7189736355723791722
 MonoBehaviour:
@@ -167,6 +167,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerTransform: {fileID: 0}
   chunkRange: 0
+  targetTag: Player
+  targetLayer:
+    serializedVersion: 2
+    m_Bits: 8
   attackDamage: 2
   moveSpeed: 3
   attackCooldown: 1
@@ -331,7 +335,7 @@ Transform:
   m_GameObject: {fileID: 7273979891317998661}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.545, z: 0}
+  m_LocalPosition: {x: 0, y: -0.029, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:

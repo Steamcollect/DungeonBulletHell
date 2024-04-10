@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
-public class PlayerCombat : MonoBehaviour
+public class PlayerCombat : Entity
 {
     [Header("Statistics references")]
     public float attackCooldown;
@@ -21,6 +22,11 @@ public class PlayerCombat : MonoBehaviour
 
     public Animator handAnim;
 
+    [Header("Upgrade references")]
+    public List<PowerUpType> bulletUpgrades = new List<PowerUpType>();
+
+    [HideInInspector] public float heatSeekingBulletDetectionRange = 1;
+
     float angle;
 
     Vector2 lookDir;
@@ -33,7 +39,12 @@ public class PlayerCombat : MonoBehaviour
         cam = Camera.main;
     }
 
-    void Update()
+    private void Start()
+    {
+        EntityManager.instance.entitys.Add(this);
+    }
+
+    public override void OnUpdate()
     {
         if (Input.GetKey(KeyCode.Mouse0) && canAttack) Attack();
 
@@ -46,12 +57,18 @@ public class PlayerCombat : MonoBehaviour
 
         Bullet bullet = Instantiate(bulletPrefab, attackPoint.position, attackPoint.rotation).GetComponent<Bullet>();
         
+        // set bullet references
         bullet.playerTransform = transform;
         bullet.chunkRange = EntityManager.instance.chunkRange;
         
+        // Set bullet stats
         bullet.moveSpeed = bulletSpeed;
         bullet.attackDamage = attackDamage;
         bullet.targetTag = targetTag;
+
+        // Set bullet upgrades
+        bullet.Setup(bulletUpgrades);
+        bullet.heatSeekingBulletDetectionRange = heatSeekingBulletDetectionRange;
 
         EntityManager.instance.entitys.Add(bullet);
 

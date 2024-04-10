@@ -31,5 +31,12 @@ public enum PowerUpRarity
 [System.Serializable]
 public enum PowerUpType
 {
-    Exploding,
+    ExplodingBullet,
+    LaserGolem,
+    HandOfGod,
+    HeatSeeking_Bullet, HeatSeeking_Bullet_II,
+
+    RuneOfLife, RuneOfLifeII, RuneOfLifeIII, RuneOfLifeIV,
+    PowerRune, PowerRuneII, PowerRuneIII, PowerRuneIV,
+    RuneOfAgility, RuneOfAgilityII, RuneOfAgilityIII, RuneOfAgilityIV,
 }

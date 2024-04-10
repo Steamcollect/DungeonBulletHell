@@ -44,6 +44,7 @@ public class PopUpText : MonoBehaviour
 
         Hid();
         PopUpManager.instance.popUpTexts.Enqueue(this);
+        gameObject.SetActive(false);
     }
 
     public void Hid()

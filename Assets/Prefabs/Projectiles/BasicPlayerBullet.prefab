@@ -116,8 +116,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8795200350340036404}
-  - component: {fileID: 435891468006190452}
   - component: {fileID: 6002024064271837000}
+  - component: {fileID: 435891468006190452}
+  - component: {fileID: 1447012711004953496}
   m_Layer: 0
   m_Name: BasicPlayerBullet
   m_TagString: Untagged
@@ -141,23 +142,6 @@ Transform:
   - {fileID: 440288249501851694}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &435891468006190452
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9032870074224781599}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bcab7fa0859f2d54c9259f6a941387db, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerTransform: {fileID: 0}
-  chunkRange: 0
-  moveSpeed: 5
-  attackDamage: 1
-  targetTag: Enemy
 --- !u!70 &6002024064271837000
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -195,3 +179,41 @@ CapsuleCollider2D:
   m_Offset: {x: 0.03237553, y: -0.0018634051}
   m_Size: {x: 0.19207302, y: 0.25226167}
   m_Direction: 0
+--- !u!114 &435891468006190452
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9032870074224781599}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bcab7fa0859f2d54c9259f6a941387db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerTransform: {fileID: 0}
+  chunkRange: 0
+  targetTag: Enemy
+  targetLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  moveSpeed: 5
+  attackDamage: 1
+  upgrades: []
+--- !u!114 &1447012711004953496
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9032870074224781599}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e870696ca9262d48aa1a6f13ab2aa76, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetLayer:
+    serializedVersion: 2
+    m_Bits: 64
+  detectionRange: 1
+  rotationSpeed: 0.01

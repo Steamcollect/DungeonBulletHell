@@ -47,6 +47,7 @@ public class BasicRangeEnemy : Enemy
         bullet.moveSpeed = bulletSpeed;
         bullet.attackDamage = attackDamage;
         bullet.targetTag = playerTransform.tag;
+        bullet.targetLayer = targetLayer;
 
         EntityManager.instance.entitys.Add(bullet);
     }

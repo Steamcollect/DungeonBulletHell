@@ -1,24 +1,39 @@
-using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 using System.Linq;
+using UnityEngine;
 
 public class PowerUpManager : MonoBehaviour
-{
+{    
     [Header("Power up references")]
     [SerializeField] List<PowerUpData> powerUpAvailable = new List<PowerUpData>();
     Dictionary<PowerUpData, int> powerUpUtilisationCount = new Dictionary<PowerUpData, int>();
 
     [Header("Choice UI references")]
+    public int choicesCount;
+ 
     List<PowerUpChoiceUI> choicesUI = new List<PowerUpChoiceUI>();
     [SerializeField] GameObject choiceUiParent;
     [SerializeField] GameObject choiceUiGO;
 
+    [Header("Power up setup references")]
+    public GameObject laserGolemGO;
+
+    PlayerMovement playerMovement;
+    PlayerCombat playerCombat;
+    PlayerHealth playerHealth;
+
+    private void Awake()
+    {
+        playerMovement = FindFirstObjectByType<PlayerMovement>();
+        playerCombat = FindFirstObjectByType<PlayerCombat>();
+        playerHealth = FindFirstObjectByType<PlayerHealth>();
+    }
+
     private void Start()
     {
-        for (int i = 0; i < 2; i++)
+        for (int i = 0; i < choicesCount; i++)
         {
-            AddPowerUpUI();
+            AddChoiceUI();
         }
 
         for (int i = 0; i < powerUpAvailable.Count; i++)
@@ -76,25 +91,83 @@ public class PowerUpManager : MonoBehaviour
 
     public void SelectPowerUp(PowerUpData powerUp)
     {
-        powerUpUtilisationCount[powerUp]++;
-        if (powerUp.maxUtilisation <= powerUpUtilisationCount[powerUp]) RemoverPowerUp(powerUp);
-
-        for (int i = 0; i < powerUp.powerUpUnlockable.Length; i++) addPowerUpToList(powerUp.powerUpUnlockable[i]);
-
         choiceUiParent.SetActive(false);
 
         // Set statistics
         switch (powerUp.powerUpType)
         {
-            case PowerUpType.Exploding:
+            case PowerUpType.ExplodingBullet:
                 break;
 
-            default:
+            case PowerUpType.LaserGolem:
+                laserGolemGO.SetActive(true);
+                laserGolemGO.GetComponent<LaserGolem>().Setup();
                 break;
+
+            case PowerUpType.HandOfGod:
+                choicesCount++;
+                AddChoiceUI();
+                break;
+
+            case PowerUpType.HeatSeeking_Bullet:
+                playerCombat.bulletUpgrades.Add(PowerUpType.HeatSeeking_Bullet);
+                break;
+            case PowerUpType.HeatSeeking_Bullet_II:
+                playerCombat.heatSeekingBulletDetectionRange += 1;
+                break;
+
+            case PowerUpType.RuneOfLife:
+                playerHealth.TakeMaxHealth(1.15f);
+                break;
+            case PowerUpType.RuneOfLifeII:
+                playerHealth.TakeMaxHealth(1.3f);
+                break;
+            case PowerUpType.RuneOfLifeIII:
+                playerHealth.TakeMaxHealth(1.5f);
+                break;
+            case PowerUpType.RuneOfLifeIV:
+                playerHealth.TakeMaxHealth(1.8f);
+                break;
+
+            case PowerUpType.PowerRune:
+                playerCombat.attackDamage += 5;
+                break;
+            case PowerUpType.PowerRuneII:
+                playerCombat.attackDamage += 10;
+                break;
+            case PowerUpType.PowerRuneIII:
+                playerCombat.attackDamage += 20;
+                break;
+            case PowerUpType.PowerRuneIV:
+                playerCombat.attackDamage += 30;
+                break;
+            
+            case PowerUpType.RuneOfAgility:
+                playerMovement.moveSpeed *= 1.1f;
+                    break;
+            case PowerUpType.RuneOfAgilityII:
+                playerMovement.moveSpeed *= 1.15f;
+                break;
+            case PowerUpType.RuneOfAgilityIII:
+                playerMovement.moveSpeed *= 1.2f;
+                break;
+            case PowerUpType.RuneOfAgilityIV:
+                playerMovement.moveSpeed *= 1.4f;
+                break;
+        }
+
+        // Remove power up if max utilisation exceeded
+        powerUpUtilisationCount[powerUp]++;
+        if (powerUp.maxUtilisation <= powerUpUtilisationCount[powerUp])
+        {
+            // Add new power up to list
+            for (int i = 0; i < powerUp.powerUpUnlockable.Length; i++) AddPowerUpToList(powerUp.powerUpUnlockable[i]);
+
+            RemoverPowerUp(powerUp);
         }
     }
 
-    void addPowerUpToList(PowerUpData powerUp)
+    void AddPowerUpToList(PowerUpData powerUp)
     {
         powerUpAvailable.Add(powerUp);
         powerUpUtilisationCount.Add(powerUp, 0);
@@ -104,7 +177,7 @@ public class PowerUpManager : MonoBehaviour
         powerUpAvailable.Remove(powerUp);
         powerUpUtilisationCount.Remove(powerUp);
     }
-    void AddPowerUpUI()
+    void AddChoiceUI()
     {
         PowerUpChoiceUI choiceUI = Instantiate(choiceUiGO, choiceUiParent.transform).GetComponent<PowerUpChoiceUI>();
         choiceUI.powerUpManager = this;

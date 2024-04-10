@@ -1,11 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
+using TMPro;
 using UnityEngine.UI;
 
 public class PlayerHealth : EntityHealth
 {
-    public Slider healthBarSlider;
+    public RectTransform healthBarParent;
+    public Transform healthBarVisual, damageBarTemplate;
+    public TMP_Text healthTxt;
 
     private void Start()
     {
@@ -25,12 +29,11 @@ public class PlayerHealth : EntityHealth
 
     public override void OnDie()
     {
-        
     }
 
     void SetHealthBarVisual()
     {
-        healthBarSlider.maxValue = maxHealth;
-        healthBarSlider.value = currentHealth;
+        healthTxt.text = currentHealth.ToString() + "/" + maxHealth.ToString();
+        healthBarVisual.DOScaleX(currentHealth / maxHealth, .15f);
     }
 }

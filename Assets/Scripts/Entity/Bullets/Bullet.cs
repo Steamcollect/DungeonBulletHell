@@ -4,14 +4,26 @@ using UnityEngine;
 
 public abstract class Bullet : Entity
 {
+    public Transform playerTransform;
+    [HideInInspector] public float chunkRange;
+
+    public string targetTag;
+    public LayerMask targetLayer;
+
     public float moveSpeed;
     public int attackDamage;
 
-    public string targetTag;
+    [Header("Upgrade references")]
+    public List<BulletUpgrade> upgrades = new List<BulletUpgrade>();
+    
+    [HideInInspector] public float heatSeekingBulletDetectionRange;
 
     public override void OnUpdate()
     {
         if (Vector2.Distance(transform.position, playerTransform.position) > chunkRange) Destroy(gameObject);
+
+        // Call upgrade Update function
+        for (int i = 0; i < upgrades.Count; i++) upgrades[i].OnUpdate();
 
         OnMove();
     }
@@ -26,4 +38,34 @@ public abstract class Bullet : Entity
         }
     }
     public abstract void OnCollision(GameObject hit);
+    
+    public void Setup(List<PowerUpType> upgradesType)
+    {
+        BulletUpgrade[] comps = GetComponents<BulletUpgrade>();
+        foreach (BulletUpgrade comp in comps)
+        {
+            comp.enabled = false;
+        }
+
+        StartCoroutine(SetupUpgrade(upgradesType));
+    }
+    IEnumerator SetupUpgrade(List<PowerUpType> upgradesType)
+    {
+        yield return new WaitForSeconds(.8f);
+
+        foreach (PowerUpType current in upgradesType)
+        {
+            switch (current)
+            {
+                case PowerUpType.HeatSeeking_Bullet:
+                    if (TryGetComponent<HeatSeekingBulletUpgrade>(out HeatSeekingBulletUpgrade tmp))
+                    {
+                        tmp.enabled = true;
+                        tmp.detectionRange = heatSeekingBulletDetectionRange;
+                        upgrades.Add(tmp);
+                    }
+                    break;
+            }
+        }
+    }
 }

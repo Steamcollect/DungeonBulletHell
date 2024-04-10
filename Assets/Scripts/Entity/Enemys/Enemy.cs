@@ -4,6 +4,12 @@ using UnityEngine;
 
 public abstract class Enemy : Entity
 {
+    public Transform playerTransform;
+    [HideInInspector] public float chunkRange;
+
+    public string targetTag;
+    public LayerMask targetLayer;
+
     [Header("Statistics references")]
     public int attackDamage;
     public float moveSpeed;

@@ -49,7 +49,8 @@ public class EnemySpawner : MonoBehaviour
 
         Vector2 randomPointAroundPlayer = (Vector2)playerTransform.position + (Random.insideUnitCircle.normalized * spawningRadius);
         current.transform.position = randomPointAroundPlayer;
-                
+        current.chunkRange = entityManager.chunkRange;
+
         entityManager.entitys.Add(current);
     }
 

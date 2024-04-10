@@ -21,7 +21,10 @@ public class PopUpManager : MonoBehaviour
     public void HitPopUp(Vector2 pos, bool isLeft, string text)
     {
         if (popUpTexts.Count <= 0) popUpTexts.Enqueue(CreatePopUpText());
-        popUpTexts.Dequeue().CreatePopUp(pos, isLeft, text);
+        PopUpText tmp = popUpTexts.Dequeue();
+
+        tmp.gameObject.SetActive(true);
+        tmp.CreatePopUp(pos, isLeft, text);
     }
 
     PopUpText CreatePopUpText()

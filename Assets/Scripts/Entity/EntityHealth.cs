@@ -4,7 +4,7 @@ using UnityEngine;
 
 public abstract class EntityHealth : MonoBehaviour
 {
-    public int maxHealth, currentHealth;
+    public float maxHealth, currentHealth;
 
     public void Heal(int healthGiven)
     {
@@ -15,10 +15,10 @@ public abstract class EntityHealth : MonoBehaviour
     }
     public abstract void OnHeal();
 
-    public void TakeMaxHealth(int healthGiven)
+    public void TakeMaxHealth(float healthGivenPourcentage)
     {
-        maxHealth += healthGiven;
-        currentHealth += healthGiven;
+        maxHealth *= healthGivenPourcentage;
+        currentHealth *= healthGivenPourcentage;
 
         OnHeal();
     }
@@ -31,7 +31,8 @@ public abstract class EntityHealth : MonoBehaviour
         PopUpManager.instance.HitPopUp(transform.position, attackerPos.x < transform.position.x ? false : true, damageTaken.ToString());
 
         if (currentHealth <= 0) OnDie();
-        else OnTakeDamage();
+        
+        OnTakeDamage();
     }
     public abstract void OnTakeDamage();
     public abstract void OnDie();

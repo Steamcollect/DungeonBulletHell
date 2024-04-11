@@ -171,7 +171,7 @@ MonoBehaviour:
   targetLayer:
     serializedVersion: 2
     m_Bits: 8
-  attackDamage: 2
+  attackDamage: 6
   moveSpeed: 3
   attackCooldown: 1
   canAttack: 1

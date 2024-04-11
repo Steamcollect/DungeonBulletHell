@@ -1,14 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
+using TMPro;
+using DG.Tweening;
 
 public class PlayerXP : MonoBehaviour
 {
     float maxXp, currentXp;
     int level = 1;
 
-    public Slider xpSlider;
+    public Transform xpBar;
+    public TMP_Text levelTxt;
 
     PowerUpManager powerUpManager;
 
@@ -43,8 +45,6 @@ public class PlayerXP : MonoBehaviour
 
             powerUpManager.SetPowerUpChoices();
 
-            xpSlider.maxValue = maxXp;
-            xpSlider.value = currentXp;
             TakeXP(xpRemining);
         }
 
@@ -53,7 +53,7 @@ public class PlayerXP : MonoBehaviour
 
     void SetXpBarVisual()
     {
-        xpSlider.maxValue = maxXp;
-        xpSlider.value = currentXp;
+        xpBar.DOScaleX(currentXp / maxXp, .15f);
+        levelTxt.text = "lvl " + level.ToString();
     }
 }

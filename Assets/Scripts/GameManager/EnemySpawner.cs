@@ -51,7 +51,7 @@ public class EnemySpawner : MonoBehaviour
         current.transform.position = randomPointAroundPlayer;
         current.chunkRange = entityManager.chunkRange;
 
-        entityManager.entitys.Add(current);
+        entityManager.enemys.Add(current);
     }
 
     private void OnDrawGizmosSelected()

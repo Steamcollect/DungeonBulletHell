@@ -177,7 +177,7 @@ MonoBehaviour:
   canAttack: 1
   bulletSpeed: 5
   attackPoint: {fileID: 7244537912444336096}
-  bulletPrefab: {fileID: 9032870074224781599, guid: 072105b36641c044da1d90b11a187d46, type: 3}
+  bulletPrefab: {fileID: 9032870074224781599, guid: 62f68a7ce5f301f439ce4b92e9f47ee5, type: 3}
   attackRange: 5
   handParent: {fileID: 3232428892653101843}
 --- !u!114 &5385305525384052022

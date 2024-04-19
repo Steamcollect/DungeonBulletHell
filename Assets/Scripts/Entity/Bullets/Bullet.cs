@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class Bullet : Entity
+public abstract class Bullet : MonoBehaviour
 {
     public Transform playerTransform;
     [HideInInspector] public float chunkRange;
@@ -13,20 +13,14 @@ public abstract class Bullet : Entity
     public float moveSpeed;
     public int attackDamage;
 
+    [Header("References")]
+    public SpriteRenderer graphics;
+
     [Header("Upgrade references")]
     public List<BulletUpgrade> upgrades = new List<BulletUpgrade>();
     
     [HideInInspector] public float heatSeekingBulletDetectionRange;
 
-    public override void OnUpdate()
-    {
-        if (Vector2.Distance(transform.position, playerTransform.position) > chunkRange) Destroy(gameObject);
-
-        // Call upgrade Update function
-        for (int i = 0; i < upgrades.Count; i++) upgrades[i].OnUpdate();
-
-        OnMove();
-    }
 
     public abstract void OnMove();
 

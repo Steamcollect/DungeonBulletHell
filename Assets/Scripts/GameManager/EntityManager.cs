@@ -7,7 +7,8 @@ public class EntityManager : MonoBehaviour
     public float chunkRange;
     public Transform playerTransform;
 
-    public List<Entity> entitys = new List<Entity>();
+    public List<Enemy> enemys = new List<Enemy>();
+    public List<Bullet> bullets = new List<Bullet>();
 
     public static EntityManager instance;
 
@@ -18,10 +19,31 @@ public class EntityManager : MonoBehaviour
 
     private void Update()
     {
-        entitys.RemoveAll(x => x == null);
-        for (int i = 0; i < entitys.Count; i++)
+        // Enemys
+        enemys.RemoveAll(x => x == null);
+        for (int i = 0; i < enemys.Count; i++)
         {
-            entitys[i].OnUpdate();
+            // Chunk system
+            if (Vector2.Distance(enemys[i].transform.position, playerTransform.position) > chunkRange)
+            {
+                float posX = (enemys[i].transform.position.x - playerTransform.position.x) * .9f * -1;
+                float posY = (enemys[i].transform.position.y - playerTransform.position.y) * .9f * -1;
+                enemys[i].transform.position = playerTransform.position + new Vector3(posX, posY);
+            }
+
+            enemys[i].OnUpdate();
+        }
+        
+        // Bullets
+        bullets.RemoveAll(x => x == null);
+        for (int i = 0; i < bullets.Count; i++)
+        {
+            // Chunk system
+            if (Vector2.Distance(bullets[i].transform.position, playerTransform.position) > chunkRange) Destroy(bullets[i].gameObject);
+
+            // Call upgrade Update function
+            for (int y = 0; y < bullets[i].upgrades.Count; y++) bullets[i].upgrades[y].OnUpdate();
+            bullets[i].OnMove();
         }
     }
 

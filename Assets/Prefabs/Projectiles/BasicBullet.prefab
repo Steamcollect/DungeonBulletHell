@@ -120,7 +120,7 @@ GameObject:
   - component: {fileID: 435891468006190452}
   - component: {fileID: 1447012711004953496}
   m_Layer: 0
-  m_Name: BasicPlayerBullet
+  m_Name: BasicBullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -199,7 +199,9 @@ MonoBehaviour:
     m_Bits: 0
   moveSpeed: 5
   attackDamage: 1
+  graphics: {fileID: 2231727648411973942}
   upgrades: []
+  heatSeekingBulletDetectionRange: 0
 --- !u!114 &1447012711004953496
 MonoBehaviour:
   m_ObjectHideFlags: 0

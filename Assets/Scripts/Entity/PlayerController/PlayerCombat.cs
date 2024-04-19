@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
-public class PlayerCombat : Entity
+public class PlayerCombat : MonoBehaviour
 {
     [Header("Statistics references")]
     public float attackCooldown;
@@ -39,12 +39,7 @@ public class PlayerCombat : Entity
         cam = Camera.main;
     }
 
-    private void Start()
-    {
-        EntityManager.instance.entitys.Add(this);
-    }
-
-    public override void OnUpdate()
+    public void Update()
     {
         if (Input.GetKey(KeyCode.Mouse0) && canAttack) Attack();
 
@@ -70,7 +65,7 @@ public class PlayerCombat : Entity
         bullet.Setup(bulletUpgrades);
         bullet.heatSeekingBulletDetectionRange = heatSeekingBulletDetectionRange;
 
-        EntityManager.instance.entitys.Add(bullet);
+        EntityManager.instance.bullets.Add(bullet);
 
         // Hand animation
         int rnd = Random.Range(0, 2);

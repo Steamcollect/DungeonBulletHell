@@ -2,7 +2,7 @@ using UnityEngine;
 using System.Collections;
 using NUnit.Framework;
 
-public class LaserGolem : Entity
+public class LaserGolem : MonoBehaviour
 {
     public Transform playerTransform;
     [HideInInspector] public float chunkRange;
@@ -36,12 +36,11 @@ public class LaserGolem : Entity
 
     public void Setup()
     {       
-        EntityManager.instance.entitys.Add(this);
         transform.position = playerTransform.position;
         StartCoroutine(SetMovePos());
     }
 
-    public override void OnUpdate()
+    public void Update()
     {
         if (target == null) target = GetAttackTarget();
         else if (canAttack) StartCoroutine(Attack());

@@ -35,7 +35,7 @@ public class BasicRangeEnemy : Enemy
         SetHandVisual();
     }
 
-    public override void Attack()
+    public void Attack()
     {
         StartCoroutine(AttackCooldown());
 
@@ -49,7 +49,9 @@ public class BasicRangeEnemy : Enemy
         bullet.targetTag = playerTransform.tag;
         bullet.targetLayer = targetLayer;
 
-        EntityManager.instance.entitys.Add(bullet);
+        bullet.graphics.color = new Color(1, .1f, .1f, 1);
+
+        EntityManager.instance.bullets.Add(bullet);
     }
 
 

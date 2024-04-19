@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerMovement : Entity
+public class PlayerMovement : MonoBehaviour
 {
     public float moveSpeed;
 
@@ -19,12 +19,7 @@ public class PlayerMovement : Entity
         anim = GetComponent<Animator>();
     }
 
-    private void Start()
-    {
-        EntityManager.instance.entitys.Add(this);
-    }
-
-    public override void OnUpdate()
+    public void Update()
     {
         GetInput();
 

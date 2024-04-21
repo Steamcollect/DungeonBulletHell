@@ -8,7 +8,6 @@ public class BasicRangeEnemy : Enemy
     public float bulletSpeed;
 
     public Transform attackPoint;
-    public GameObject bulletPrefab;
 
     public float attackRange;
 
@@ -39,8 +38,10 @@ public class BasicRangeEnemy : Enemy
     {
         StartCoroutine(AttackCooldown());
 
-        Bullet bullet = Instantiate(bulletPrefab, attackPoint.position, attackPoint.rotation).GetComponent<Bullet>();
-        
+        Bullet bullet = EntityManager.instance.SpawnBullet();
+        bullet.transform.position = attackPoint.position;
+        bullet.transform.rotation = attackPoint.rotation;
+
         bullet.playerTransform = playerTransform;
         bullet.chunkRange = EntityManager.instance.chunkRange;
 
@@ -53,7 +54,6 @@ public class BasicRangeEnemy : Enemy
 
         EntityManager.instance.bullets.Add(bullet);
     }
-
 
     void SetHandVisual()
     {

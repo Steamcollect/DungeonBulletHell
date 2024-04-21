@@ -96,6 +96,7 @@ MonoBehaviour:
   nameTxt: {fileID: 3866234368863003750}
   descriptionTxt: {fileID: 3963632724259184003}
   powerUpVisual: {fileID: 4567202882431006207}
+  backgroundImage: {fileID: 1666676360790472495}
   commonSprite: {fileID: -1126396554828643901, guid: fb098a182628bc54ea6b22d7d863a701, type: 3}
   rareSprite: {fileID: 2425626133866895970, guid: fb098a182628bc54ea6b22d7d863a701, type: 3}
   epicSprite: {fileID: -3274520711770106563, guid: fb098a182628bc54ea6b22d7d863a701, type: 3}
@@ -211,7 +212,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 223.7771}
+  m_SizeDelta: {x: -166.1455, y: 223.7771}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!222 &4231661940765911216
 CanvasRenderer:
@@ -344,8 +345,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 120.4648}
+  m_AnchoredPosition: {x: 0, y: -63.293518}
+  m_SizeDelta: {x: -189.8806, y: 57.1713}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!222 &2412219161987502618
 CanvasRenderer:

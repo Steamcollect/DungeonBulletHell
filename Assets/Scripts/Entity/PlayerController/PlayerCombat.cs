@@ -15,8 +15,6 @@ public class PlayerCombat : MonoBehaviour
     public string targetTag;
 
     [Header("Combat references")]
-    public GameObject bulletPrefab;
-
     public Transform handParent;
     public Transform attackPoint;
 
@@ -50,8 +48,10 @@ public class PlayerCombat : MonoBehaviour
     {
         StartCoroutine(AttackCooldown());
 
-        Bullet bullet = Instantiate(bulletPrefab, attackPoint.position, attackPoint.rotation).GetComponent<Bullet>();
-        
+        Bullet bullet = EntityManager.instance.SpawnBullet();
+        bullet.transform.position = attackPoint.position;
+        bullet.transform.rotation = attackPoint.rotation;
+
         // set bullet references
         bullet.playerTransform = transform;
         bullet.chunkRange = EntityManager.instance.chunkRange;

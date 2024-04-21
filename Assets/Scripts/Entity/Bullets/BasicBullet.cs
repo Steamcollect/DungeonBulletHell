@@ -12,6 +12,6 @@ public class BasicBullet : Bullet
     public override void OnCollision(GameObject hit)
     {
         hit.GetComponent<EntityHealth>().TakeDamage(attackDamage, transform.position);
-        Destroy(gameObject, .01f);
+        EntityManager.instance.DispawnBullet(this);
     }
 }

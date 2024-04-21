@@ -7,18 +7,12 @@ using TMPro;
 public class PowerUpChoiceUI : MonoBehaviour
 {
     [SerializeField] TMP_Text nameTxt, descriptionTxt;
-    [SerializeField] Image powerUpVisual;
+    [SerializeField] Image powerUpVisual, backgroundImage;
 
-    Image backgroundImage;
     public Sprite commonSprite, rareSprite, epicSprite, legendarySprite;
 
     PowerUpData powerUp;
     [HideInInspector] public PowerUpManager powerUpManager;
-
-    private void Awake()
-    {
-        backgroundImage = GetComponent<Image>();
-    }
 
     public void SetChoiceVisual(PowerUpData powerUp)
     {

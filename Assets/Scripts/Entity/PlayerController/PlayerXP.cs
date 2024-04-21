@@ -14,9 +14,13 @@ public class PlayerXP : MonoBehaviour
 
     PowerUpManager powerUpManager;
 
+    public static PlayerXP instance;
+
     private void Awake()
     {
         powerUpManager = FindFirstObjectByType<PowerUpManager>();
+
+        instance = this;
     }
 
     private void Start()

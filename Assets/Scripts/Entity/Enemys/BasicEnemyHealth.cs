@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class BasicEnemyHealth : EntityHealth
 {
+    public int xpGiven;
+
     private void Start()
     {
         currentHealth = maxHealth;
@@ -21,6 +23,7 @@ public class BasicEnemyHealth : EntityHealth
 
     public override void OnDie()
     {
+        PlayerXP.instance.TakeXP(xpGiven);
         Destroy(gameObject);
     }
 }

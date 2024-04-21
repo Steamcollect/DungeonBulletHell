@@ -156,6 +156,53 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: -20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &53657832
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 53657834}
+  - component: {fileID: 53657833}
+  m_Layer: 0
+  m_Name: CircleOrbe
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!114 &53657833
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 53657832}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2daf28917d738f41a8746c324fde41d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  orbePrefabs: {fileID: 7751097536491306663, guid: aea6544dd3b839042969f74294e48297, type: 3}
+  rotationSpeed: 15
+  orbesRadius: 2
+--- !u!4 &53657834
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 53657832}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -2, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2069107070}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &97349856
 GameObject:
   m_ObjectHideFlags: 0
@@ -830,11 +877,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd1310315a632054ca252858cc40903e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  powerUpAvailable: []
+  powerUpAvailable:
+  - {fileID: 11400000, guid: 9d0e5332576256e49a8edd5dfb44dee4, type: 2}
+  - {fileID: 11400000, guid: 77bf731cd54775d45bd7a024815fae76, type: 2}
+  - {fileID: 11400000, guid: 4f56c12134fba024083a131dc9add3ec, type: 2}
+  - {fileID: 11400000, guid: c24e903929d9b6b42a61fd318448e7f1, type: 2}
+  - {fileID: 11400000, guid: c8507b9bc4b43d94399d3890f55204c9, type: 2}
+  - {fileID: 11400000, guid: f84bd5dff9ddbdf469df70d41dfd686a, type: 2}
+  - {fileID: 11400000, guid: fbc553486174a6a489d0fd786a7421f8, type: 2}
   choicesCount: 2
   choiceUiParent: {fileID: 1423039801}
   choiceUiGO: {fileID: 1291394478261017401, guid: 722ec717c672e5147b1475f7e6d2a047, type: 3}
   laserGolemGO: {fileID: 2140763452}
+  circleOrbe: {fileID: 53657833}
 --- !u!114 &177432177
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -996,8 +1051,8 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: -0.345927}
-  m_Size: {x: 0.62890404, y: 1.071903}
+  m_Offset: {x: 0, y: 0.114605844}
+  m_Size: {x: 0.62890404, y: 1.0634655}
   m_Direction: 0
 --- !u!50 &181236285
 Rigidbody2D:
@@ -1042,11 +1097,10 @@ MonoBehaviour:
   bulletSpeed: 5
   attackDamage: 5
   targetTag: Enemy
-  bulletPrefab: {fileID: 9032870074224781599, guid: 62f68a7ce5f301f439ce4b92e9f47ee5, type: 3}
   handParent: {fileID: 1452802975}
   attackPoint: {fileID: 418592051}
   handAnim: {fileID: 97349859}
-  bulletUpgrades: 0300000004000000
+  bulletUpgrades: 
   heatSeekingBulletDetectionRange: 1
 --- !u!114 &181236287
 MonoBehaviour:
@@ -1664,6 +1718,7 @@ MonoBehaviour:
   playerTransform: {fileID: 181236283}
   enemys: []
   bullets: []
+  bulletPrefab: {fileID: 9032870074224781599, guid: 62f68a7ce5f301f439ce4b92e9f47ee5, type: 3}
 --- !u!4 &447668449
 Transform:
   m_ObjectHideFlags: 0
@@ -52258,7 +52313,7 @@ Transform:
   m_GameObject: {fileID: 1452802974}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.448, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -77822,6 +77877,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2140763454}
+  - {fileID: 53657834}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2077943603

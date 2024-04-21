@@ -17,6 +17,7 @@ public class PowerUpManager : MonoBehaviour
 
     [Header("Power up setup references")]
     public GameObject laserGolemGO;
+    public OrbeCircle circleOrbe;
 
     PlayerMovement playerMovement;
     PlayerCombat playerCombat;
@@ -39,7 +40,7 @@ public class PowerUpManager : MonoBehaviour
         for (int i = 0; i < powerUpAvailable.Count; i++)
         {
             powerUpUtilisationCount.Add(powerUpAvailable[i], 0);
-        } 
+        }
     }
 
     public void SetPowerUpChoices()
@@ -56,6 +57,8 @@ public class PowerUpManager : MonoBehaviour
                 case <= 5:
                     // Legendary
                     currentsPowerUp = powerUpAvailable.Where(elem => elem.rarity == PowerUpRarity.Legendary).ToList();
+                    if(currentsPowerUp.Count <= 0) continue;
+
                     current = currentsPowerUp.GetRandom();
                     choicesUI[i].SetChoiceVisual(current);
                     break;
@@ -63,6 +66,8 @@ public class PowerUpManager : MonoBehaviour
                 case <= 15:
                     // Epic
                     currentsPowerUp = powerUpAvailable.Where(elem => elem.rarity == PowerUpRarity.Epic).ToList();
+                    if (currentsPowerUp.Count <= 0) continue;
+
                     current = currentsPowerUp.GetRandom();
                     choicesUI[i].SetChoiceVisual(current);
                     break;
@@ -70,6 +75,8 @@ public class PowerUpManager : MonoBehaviour
                 case <= 40:
                     // Rare
                     currentsPowerUp = powerUpAvailable.Where(elem => elem.rarity == PowerUpRarity.Rare).ToList();
+                    if (currentsPowerUp.Count <= 0) continue;
+
                     current = currentsPowerUp.GetRandom();
                     choicesUI[i].SetChoiceVisual(current);
                     break;
@@ -77,6 +84,8 @@ public class PowerUpManager : MonoBehaviour
                 default:
                     // Common
                     currentsPowerUp = powerUpAvailable.Where(elem => elem.rarity == PowerUpRarity.Common).ToList();
+                    if (currentsPowerUp.Count <= 0) continue;
+
                     current = currentsPowerUp.GetRandom();
                     choicesUI[i].SetChoiceVisual(current);
                     break;
@@ -154,6 +163,19 @@ public class PowerUpManager : MonoBehaviour
             case PowerUpType.RuneOfAgilityIV:
                 playerMovement.moveSpeed *= 1.4f;
                 break;
+
+            case PowerUpType.MagicCircle:
+                circleOrbe.gameObject.SetActive(true);
+                break;
+            case PowerUpType.CircleOrbEvolution:
+                circleOrbe.CreateOrbe();
+                break;
+            case PowerUpType.CircleRangeEvolution:
+                circleOrbe.orbesRadius += .5f;
+                break;
+            case PowerUpType.CircleSpeedEvolution:
+                circleOrbe.rotationSpeed += 10;
+                break;        
         }
 
         // Remove power up if max utilisation exceeded

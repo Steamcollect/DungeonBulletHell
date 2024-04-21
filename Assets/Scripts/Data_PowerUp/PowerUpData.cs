@@ -39,4 +39,6 @@ public enum PowerUpType
     RuneOfLife, RuneOfLifeII, RuneOfLifeIII, RuneOfLifeIV,
     PowerRune, PowerRuneII, PowerRuneIII, PowerRuneIV,
     RuneOfAgility, RuneOfAgilityII, RuneOfAgilityIII, RuneOfAgilityIV,
+
+    MagicCircle, CircleOrbEvolution, CircleSpeedEvolution, CircleRangeEvolution,
 }

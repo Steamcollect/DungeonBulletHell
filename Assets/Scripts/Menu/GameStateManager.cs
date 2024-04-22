@@ -12,6 +12,13 @@ public class GameStateManager : MonoBehaviour
     public delegate void Paused();
     public static event Paused OnPaused;
 
+    public static GameStateManager instance;
+
+    private void Awake()
+    {
+        instance = this;
+    }
+
     public void ResumeGameState()
     {
         gameState = GameState.Gameplay;
@@ -41,4 +48,5 @@ public enum GameState
 {
     Gameplay,
     Paused,
+    StopGameAction,
 }

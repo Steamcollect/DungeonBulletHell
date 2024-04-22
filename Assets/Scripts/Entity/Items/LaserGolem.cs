@@ -42,6 +42,8 @@ public class LaserGolem : MonoBehaviour
 
     public void Update()
     {
+        if (GameStateManager.instance.gameState != GameState.Gameplay) return;
+
         if (target == null) target = GetAttackTarget();
         else if (canAttack) StartCoroutine(Attack());
 

@@ -34,6 +34,8 @@ public class EntityManager : MonoBehaviour
 
     private void Update()
     {
+        if (GameStateManager.instance.gameState != GameState.Gameplay) return;
+
         // Enemys
         enemys.RemoveAll(x => x == null);
         for (int i = 0; i < enemys.Count; i++)

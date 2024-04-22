@@ -40,6 +40,8 @@ public class OrbeCircle : MonoBehaviour
 
     private void Update()
     {
+        if (GameStateManager.instance.gameState != GameState.Gameplay) return;
+
         // Move orbes
         float currentAngle = angle;
         for (int i = 0; i < orbesReferences.Count; i++)

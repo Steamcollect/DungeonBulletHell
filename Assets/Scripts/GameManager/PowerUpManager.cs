@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Collections;
 using System.Linq;
 using UnityEngine;
 
@@ -45,6 +46,8 @@ public class PowerUpManager : MonoBehaviour
 
     public void SetPowerUpChoices()
     {
+        GameStateManager.instance.gameState = GameState.StopGameAction;
+
         List<PowerUpData> currentsPowerUp = new List<PowerUpData>(powerUpAvailable);
         List<PowerUpData> currentsRaritySelected = new List<PowerUpData>();
 
@@ -104,6 +107,7 @@ public class PowerUpManager : MonoBehaviour
     public void SelectPowerUp(PowerUpData powerUp)
     {
         choiceUiParent.SetActive(false);
+        StartCoroutine(SetGameState());
 
         // Set statistics
         switch (powerUp.powerUpType)
@@ -190,6 +194,20 @@ public class PowerUpManager : MonoBehaviour
 
             RemoverPowerUp(powerUp);
         }
+    }
+
+    IEnumerator SetGameState()
+    {
+        Time.timeScale = 0;
+        GameStateManager.instance.gameState = GameState.Gameplay;
+
+        while (Time.timeScale < 1)
+        {
+            Time.timeScale += 3 * Time.deltaTime;
+            yield return null;
+        }
+
+        Time.timeScale = 1;
     }
 
     void AddPowerUpToList(PowerUpData powerUp)

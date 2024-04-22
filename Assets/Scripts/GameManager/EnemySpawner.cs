@@ -29,6 +29,8 @@ public class EnemySpawner : MonoBehaviour
 
     private void Update()
     {
+        if (GameStateManager.instance.gameState != GameState.Gameplay) return;
+
         foreach (EnemyData enemy in enemys)
         {
             enemysSpawningTimer[enemy] += Time.deltaTime;

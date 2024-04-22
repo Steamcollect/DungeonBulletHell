@@ -39,6 +39,8 @@ public class PlayerCombat : MonoBehaviour
 
     public void Update()
     {
+        if (GameStateManager.instance.gameState != GameState.Gameplay) return;
+
         if (Input.GetKey(KeyCode.Mouse0) && canAttack) Attack();
 
         Rotate();

@@ -21,6 +21,8 @@ public class PlayerMovement : MonoBehaviour
 
     public void Update()
     {
+        if (GameStateManager.instance.gameState != GameState.Gameplay) return;
+
         GetInput();
 
         SetAnimation();
@@ -28,11 +30,20 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (GameStateManager.instance.gameState != GameState.Gameplay)
+        {
+            rb.velocity = Vector2.zero;
+            anim.speed = 0;
+            return;
+        }
+
         Move();
     }
 
     void GetInput()
     {
+        anim.speed = 1;
+
         moveInput.x = Input.GetAxisRaw("Horizontal");
         moveInput.y = Input.GetAxisRaw("Vertical");
         moveInput.Normalize();

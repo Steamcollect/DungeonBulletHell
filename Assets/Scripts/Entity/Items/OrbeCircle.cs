@@ -40,7 +40,7 @@ public class OrbeCircle : MonoBehaviour
 
     private void Update()
     {
-        if (GameStateManager.instance.gameState != GameState.Gameplay) return;
+        if (isPaused) return;
 
         // Move orbes
         float currentAngle = angle;
@@ -62,5 +62,26 @@ public class OrbeCircle : MonoBehaviour
     {
         Transform current = Instantiate(orbePrefabs, transform).transform;
         orbesReferences.Add(current);
+    }
+
+    bool isPaused = false;
+    void OnPause()
+    {
+        isPaused = true;
+    }
+    void OnResume()
+    {
+        isPaused = false;
+    }
+
+    private void OnEnable()
+    {
+        GameStateManager.OnPaused += OnPause;
+        GameStateManager.OnGameplay += OnResume;
+    }
+    private void OnDisable()
+    {
+        GameStateManager.OnPaused -= OnPause;
+        GameStateManager.OnGameplay -= OnResume;
     }
 }

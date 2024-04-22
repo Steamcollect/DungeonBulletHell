@@ -28,7 +28,7 @@ public class PauseManager : MonoBehaviour
     {
         if (isSettingsOpen)
         {
-            gameStateManager.ResumeGameState();
+            StartCoroutine(SetGameplay());
             isSettingsOpen = false;
         }
         else
@@ -37,5 +37,21 @@ public class PauseManager : MonoBehaviour
             isSettingsOpen = true;
         }
         settingsAnimator.SetBool("IsOpen", isSettingsOpen);
+    }
+
+    IEnumerator SetGameplay()
+    {
+        yield return new WaitForSeconds(.5f);
+
+        Time.timeScale = 0;
+        GameStateManager.instance.ResumeGameState();
+
+        while (Time.timeScale < 1)
+        {
+            Time.timeScale += 1 * Time.deltaTime;
+            yield return null;
+        }
+
+        Time.timeScale = 1;
     }
 }

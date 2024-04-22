@@ -27,6 +27,8 @@ public class PlayerCombat : MonoBehaviour
 
     float angle;
 
+    bool isPaused = false;
+
     Vector2 lookDir;
     Vector2 mousePos;
 
@@ -39,7 +41,7 @@ public class PlayerCombat : MonoBehaviour
 
     public void Update()
     {
-        if (GameStateManager.instance.gameState != GameState.Gameplay) return;
+        if (isPaused) return;
 
         if (Input.GetKey(KeyCode.Mouse0) && canAttack) Attack();
 
@@ -89,5 +91,25 @@ public class PlayerCombat : MonoBehaviour
 
         angle = Mathf.Atan2(lookDir.y, lookDir.x) * Mathf.Rad2Deg;
         handParent.rotation = Quaternion.Euler(0, 0, angle);
+    }
+
+    void OnPause()
+    {
+        isPaused = true;
+    }
+    void OnResume()
+    {
+        isPaused = false;
+    }
+
+    private void OnEnable()
+    {
+        GameStateManager.OnPaused += OnPause;
+        GameStateManager.OnGameplay += OnResume;
+    }
+    private void OnDisable()
+    {
+        GameStateManager.OnPaused -= OnPause;
+        GameStateManager.OnGameplay -= OnResume;
     }
 }

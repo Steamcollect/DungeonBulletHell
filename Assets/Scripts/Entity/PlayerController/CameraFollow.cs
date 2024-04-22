@@ -9,6 +9,8 @@ public class CameraFollow : MonoBehaviour
     Vector3 velocity = Vector3.zero;
     float moveTime = .2f;
 
+    bool isPaused = false;
+
     private void Awake()
     {
         target = GameObject.FindGameObjectWithTag("Player").transform;
@@ -16,8 +18,28 @@ public class CameraFollow : MonoBehaviour
 
     private void Update()
     {
-        if (GameStateManager.instance.gameState != GameState.Gameplay) return;
+        if (isPaused) return;
 
         transform.position = Vector3.SmoothDamp(transform.position, target.position + posOffset, ref velocity, moveTime);
+    }
+
+    void OnPause()
+    {
+        isPaused = true;
+    }
+    void OnResume()
+    {
+        isPaused = false;
+    }
+
+    private void OnEnable()
+    {
+        GameStateManager.OnPaused += OnPause;
+        GameStateManager.OnGameplay += OnResume;
+    }
+    private void OnDisable()
+    {
+        GameStateManager.OnPaused -= OnPause;
+        GameStateManager.OnGameplay -= OnResume;
     }
 }

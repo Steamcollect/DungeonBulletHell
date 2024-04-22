@@ -23,6 +23,7 @@ public class LaserGolem : MonoBehaviour
     public float attackCooldown;
 
     bool canAttack = true;
+    bool isPaused = false;
 
     Vector2 movePos;
     [SerializeField] Transform endLaser;
@@ -42,7 +43,7 @@ public class LaserGolem : MonoBehaviour
 
     public void Update()
     {
-        if (GameStateManager.instance.gameState != GameState.Gameplay) return;
+        if (isPaused) return;
 
         if (target == null) target = GetAttackTarget();
         else if (canAttack) StartCoroutine(Attack());
@@ -91,7 +92,7 @@ public class LaserGolem : MonoBehaviour
         canAttack = false;
         float count = 0;
 
-        while(count <= attackTime)
+        while(count <= attackTime && !isPaused)
         {
             RaycastHit2D[] hits = Physics2D.LinecastAll(transform.position, endLaser.position, targetLayer);
 
@@ -116,7 +117,7 @@ public class LaserGolem : MonoBehaviour
         else lookDir = transform.position - playerTransform.position;
 
         float targetAngle = Mathf.Atan2(lookDir.y, lookDir.x) * Mathf.Rad2Deg - 90f;
-        angle = Mathf.LerpAngle(angle, targetAngle, rotationSpeed);
+        angle = Mathf.LerpAngle(angle, targetAngle, target == null ? rotationSpeed : rotationSpeed / 3);
         transform.rotation = Quaternion.Euler(0, 0, angle);
     }
 
@@ -130,5 +131,25 @@ public class LaserGolem : MonoBehaviour
 
         Gizmos.color = Color.white;
         Gizmos.DrawLine(transform.position, endLaser.position);
+    }
+
+    void OnPause()
+    {
+        isPaused = true;
+    }
+    void OnResume()
+    {
+        isPaused = false;
+    }
+
+    private void OnEnable()
+    {
+        GameStateManager.OnPaused += OnPause;
+        GameStateManager.OnGameplay += OnResume;
+    }
+    private void OnDisable()
+    {
+        GameStateManager.OnPaused -= OnPause;
+        GameStateManager.OnGameplay -= OnResume;
     }
 }

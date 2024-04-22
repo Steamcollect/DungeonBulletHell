@@ -29,7 +29,7 @@ public class EnemySpawner : MonoBehaviour
 
     private void Update()
     {
-        if (GameStateManager.instance.gameState != GameState.Gameplay) return;
+        if (isPaused) return;
 
         foreach (EnemyData enemy in enemys)
         {
@@ -56,6 +56,26 @@ public class EnemySpawner : MonoBehaviour
         entityManager.enemys.Add(current);
     }
 
+    bool isPaused = false;
+    void OnPause()
+    {
+        isPaused = true;
+    }
+    void OnResume()
+    {
+        isPaused = false;
+    }
+
+    private void OnEnable()
+    {
+        GameStateManager.OnPaused += OnPause;
+        GameStateManager.OnGameplay += OnResume;
+    }
+    private void OnDisable()
+    {
+        GameStateManager.OnPaused -= OnPause;
+        GameStateManager.OnGameplay -= OnResume;
+    }
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;

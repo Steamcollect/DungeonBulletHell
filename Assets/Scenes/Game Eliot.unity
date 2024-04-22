@@ -78129,7 +78129,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerTransform: {fileID: 181236283}
   chunkRange: 0
-  targetTag: 
+  targetTag: Enemy
   targetLayer:
     serializedVersion: 2
     m_Bits: 64
@@ -78137,7 +78137,7 @@ MonoBehaviour:
   rotationSpeed: 0.01
   targetDetectionRange: 5
   movePosRadius: 3.2
-  attackDamage: 1
+  attackDamage: 2
   attackTime: 1
   attackCooldown: 1
   endLaser: {fileID: 1989996929}

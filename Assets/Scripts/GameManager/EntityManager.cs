@@ -34,7 +34,7 @@ public class EntityManager : MonoBehaviour
 
     private void Update()
     {
-        if (GameStateManager.instance.gameState != GameState.Gameplay) return;
+        if (isPaused) return;
 
         // Enemys
         enemys.RemoveAll(x => x == null);
@@ -91,5 +91,26 @@ public class EntityManager : MonoBehaviour
     private void OnDrawGizmosSelected()
     {
         Gizmos.DrawWireSphere(playerTransform.position, chunkRange);
+    }
+
+    bool isPaused = false;
+    void OnPause()
+    {
+        isPaused = true;
+    }
+    void OnResume()
+    {
+        isPaused = false;
+    }
+
+    private void OnEnable()
+    {
+        GameStateManager.OnPaused += OnPause;
+        GameStateManager.OnGameplay += OnResume;
+    }
+    private void OnDisable()
+    {
+        GameStateManager.OnPaused -= OnPause;
+        GameStateManager.OnGameplay -= OnResume;
     }
 }

@@ -6,6 +6,8 @@ public class PlayerMovement : MonoBehaviour
 {
     public float moveSpeed;
 
+    bool isPaused = false;
+
     Vector2 moveInput;
 
     SpriteRenderer graphics;
@@ -21,7 +23,7 @@ public class PlayerMovement : MonoBehaviour
 
     public void Update()
     {
-        if (GameStateManager.instance.gameState != GameState.Gameplay) return;
+        if (isPaused) return;
 
         GetInput();
 
@@ -30,20 +32,13 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (GameStateManager.instance.gameState != GameState.Gameplay)
-        {
-            rb.velocity = Vector2.zero;
-            anim.speed = 0;
-            return;
-        }
+        if (isPaused) return;
 
         Move();
     }
 
     void GetInput()
     {
-        anim.speed = 1;
-
         moveInput.x = Input.GetAxisRaw("Horizontal");
         moveInput.y = Input.GetAxisRaw("Vertical");
         moveInput.Normalize();
@@ -58,5 +53,28 @@ public class PlayerMovement : MonoBehaviour
         anim.SetFloat("Velocity", Mathf.Abs(rb.velocity.x) + Mathf.Abs(rb.velocity.y));
         if (rb.velocity.x < -.1) graphics.flipX = true;
         else if (rb.velocity.x > .1) graphics.flipX = false;
+    }
+
+    void OnPause()
+    {
+        rb.velocity = Vector2.zero;
+        anim.speed = 0;
+        isPaused = true;
+    }
+    void OnResume()
+    {
+        anim.speed = 1;
+        isPaused = false;
+    }
+
+    private void OnEnable()
+    {
+        GameStateManager.OnPaused += OnPause;
+        GameStateManager.OnGameplay += OnResume;
+    }
+    private void OnDisable()
+    {
+        GameStateManager.OnPaused -= OnPause;
+        GameStateManager.OnGameplay -= OnResume;
     }
 }

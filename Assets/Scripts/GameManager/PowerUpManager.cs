@@ -46,7 +46,7 @@ public class PowerUpManager : MonoBehaviour
 
     public void SetPowerUpChoices()
     {
-        GameStateManager.instance.gameState = GameState.StopGameAction;
+        GameStateManager.instance.PauseGameState();
 
         List<PowerUpData> currentsPowerUp = new List<PowerUpData>(powerUpAvailable);
         List<PowerUpData> currentsRaritySelected = new List<PowerUpData>();
@@ -107,7 +107,7 @@ public class PowerUpManager : MonoBehaviour
     public void SelectPowerUp(PowerUpData powerUp)
     {
         choiceUiParent.SetActive(false);
-        StartCoroutine(SetGameState());
+        StartCoroutine(SetGameplay());
 
         // Set statistics
         switch (powerUp.powerUpType)
@@ -196,14 +196,14 @@ public class PowerUpManager : MonoBehaviour
         }
     }
 
-    IEnumerator SetGameState()
+    IEnumerator SetGameplay()
     {
         Time.timeScale = 0;
-        GameStateManager.instance.gameState = GameState.Gameplay;
+        GameStateManager.instance.ResumeGameState();
 
         while (Time.timeScale < 1)
         {
-            Time.timeScale += 3 * Time.deltaTime;
+            Time.timeScale += 2 * Time.deltaTime;
             yield return null;
         }
 

@@ -31,8 +31,6 @@ public class PlayerXP : MonoBehaviour
 
     private void Update()
     {
-        if (GameStateManager.instance.gameState != GameState.Gameplay) return;
-
         if (Input.GetKeyDown(KeyCode.P)) TakeXP(5);
     }
 

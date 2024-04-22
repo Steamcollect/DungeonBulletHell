@@ -17,8 +17,9 @@ public abstract class EntityHealth : MonoBehaviour
 
     public void TakeMaxHealth(float healthGivenPourcentage)
     {
-        maxHealth *= healthGivenPourcentage;
-        currentHealth *= healthGivenPourcentage;
+        float healthGiven = maxHealth * healthGivenPourcentage - maxHealth;
+        maxHealth += healthGiven;
+        currentHealth += healthGiven;
 
         OnHeal();
     }

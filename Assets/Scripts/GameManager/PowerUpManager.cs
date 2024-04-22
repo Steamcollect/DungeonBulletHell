@@ -46,6 +46,7 @@ public class PowerUpManager : MonoBehaviour
     public void SetPowerUpChoices()
     {
         List<PowerUpData> currentsPowerUp = new List<PowerUpData>(powerUpAvailable);
+        List<PowerUpData> currentsRaritySelected = new List<PowerUpData>();
 
         for (int i = 0; i < choicesUI.Count; i++)
         {
@@ -56,42 +57,44 @@ public class PowerUpManager : MonoBehaviour
             {
                 case <= 5:
                     // Legendary
-                    currentsPowerUp = powerUpAvailable.Where(elem => elem.rarity == PowerUpRarity.Legendary).ToList();
-                    if(currentsPowerUp.Count <= 0) continue;
-
-                    current = currentsPowerUp.GetRandom();
-                    choicesUI[i].SetChoiceVisual(current);
+                    currentsRaritySelected = currentsPowerUp.Where(elem => elem.rarity == PowerUpRarity.Legendary).ToList();
+                    SetCurrentChoice();
                     break;
 
                 case <= 15:
                     // Epic
-                    currentsPowerUp = powerUpAvailable.Where(elem => elem.rarity == PowerUpRarity.Epic).ToList();
-                    if (currentsPowerUp.Count <= 0) continue;
-
-                    current = currentsPowerUp.GetRandom();
-                    choicesUI[i].SetChoiceVisual(current);
+                    currentsRaritySelected = currentsPowerUp.Where(elem => elem.rarity == PowerUpRarity.Epic).ToList();
+                    SetCurrentChoice();
                     break;
 
                 case <= 40:
                     // Rare
-                    currentsPowerUp = powerUpAvailable.Where(elem => elem.rarity == PowerUpRarity.Rare).ToList();
-                    if (currentsPowerUp.Count <= 0) continue;
-
-                    current = currentsPowerUp.GetRandom();
-                    choicesUI[i].SetChoiceVisual(current);
+                    currentsRaritySelected = currentsPowerUp.Where(elem => elem.rarity == PowerUpRarity.Rare).ToList();
+                    SetCurrentChoice();
                     break;
 
                 default:
                     // Common
-                    currentsPowerUp = powerUpAvailable.Where(elem => elem.rarity == PowerUpRarity.Common).ToList();
-                    if (currentsPowerUp.Count <= 0) continue;
-
-                    current = currentsPowerUp.GetRandom();
-                    choicesUI[i].SetChoiceVisual(current);
+                    currentsRaritySelected = currentsPowerUp.Where(elem => elem.rarity == PowerUpRarity.Common).ToList();
+                    SetCurrentChoice();
                     break;
             }
 
-            currentsPowerUp = new List<PowerUpData>(powerUpAvailable);
+            void SetCurrentChoice()
+            {
+                if (currentsRaritySelected.Count <= 0)
+                {
+                    choicesUI[i].gameObject.SetActive(false);
+                }
+                else
+                {
+                    choicesUI[i].gameObject.SetActive(true);
+
+                    current = currentsRaritySelected.GetRandom();
+                    choicesUI[i].SetChoiceVisual(current);
+                }
+            }
+
             currentsPowerUp.Remove(current);
         }
 

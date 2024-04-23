@@ -14,6 +14,13 @@ public class PowerUpChoiceUI : MonoBehaviour
     PowerUpData powerUp;
     [HideInInspector] public PowerUpManager powerUpManager;
 
+    InteractiveButton button;
+
+    private void Awake()
+    {
+        button = GetComponent<InteractiveButton>();
+    }
+
     public void SetChoiceVisual(PowerUpData powerUp)
     {
         this.powerUp = powerUp;
@@ -45,5 +52,6 @@ public class PowerUpChoiceUI : MonoBehaviour
     public void SelectButton()
     {
         powerUpManager.SelectPowerUp(powerUp);
+        button.OnPointerExit(null);
     }
 }

@@ -15,6 +15,7 @@ public class PowerUpManager : MonoBehaviour
     List<PowerUpChoiceUI> choicesUI = new List<PowerUpChoiceUI>();
     [SerializeField] GameObject choiceUiParent;
     [SerializeField] GameObject choiceUiGO;
+    [SerializeField] Animator choiceAnim;
 
     [Header("Power up setup references")]
     public GameObject laserGolemGO;
@@ -101,13 +102,28 @@ public class PowerUpManager : MonoBehaviour
             currentsPowerUp.Remove(current);
         }
 
-        choiceUiParent.SetActive(true);
+        if(IsAllChoicesEmpty())
+        {
+            print("New selection");
+            SetPowerUpChoices();
+            return;
+        }
+        bool IsAllChoicesEmpty()
+        {
+            foreach (var current in choicesUI)
+            {
+                if (current.gameObject.activeSelf == true) return false;
+            }
+
+            return true;
+        }
+
+        choiceAnim.SetBool("IsOpen", true);
     }
 
     public void SelectPowerUp(PowerUpData powerUp)
     {
-        choiceUiParent.SetActive(false);
-        StartCoroutine(SetGameplay());
+        choiceAnim.SetBool("IsOpen", false);
 
         // Set statistics
         switch (powerUp.powerUpType)
@@ -121,8 +137,7 @@ public class PowerUpManager : MonoBehaviour
                 break;
 
             case PowerUpType.HandOfGod:
-                choicesCount++;
-                AddChoiceUI();
+                OnHandOfGod = true;
                 break;
 
             case PowerUpType.HeatSeeking_Bullet:
@@ -159,16 +174,16 @@ public class PowerUpManager : MonoBehaviour
                 break;
             
             case PowerUpType.RuneOfAgility:
-                playerMovement.moveSpeed *= 1.1f;
+                playerMovement.moveSpeed *= 1.05f;
                     break;
             case PowerUpType.RuneOfAgilityII:
-                playerMovement.moveSpeed *= 1.15f;
+                playerMovement.moveSpeed *= 1.08f;
                 break;
             case PowerUpType.RuneOfAgilityIII:
-                playerMovement.moveSpeed *= 1.2f;
+                playerMovement.moveSpeed *= 1.13f;
                 break;
             case PowerUpType.RuneOfAgilityIV:
-                playerMovement.moveSpeed *= 1.4f;
+                playerMovement.moveSpeed *= 1.2f;
                 break;
 
             case PowerUpType.MagicCircle:
@@ -194,6 +209,23 @@ public class PowerUpManager : MonoBehaviour
 
             RemoverPowerUp(powerUp);
         }
+
+        StartCoroutine(OnAnimationEnd());
+    }
+
+    bool OnHandOfGod = false;
+    IEnumerator OnAnimationEnd()
+    {
+        yield return new WaitForSeconds(.5f);
+
+        if (OnHandOfGod)
+        {
+            choicesCount++;
+            AddChoiceUI();
+            OnHandOfGod = false;
+        }
+
+        StartCoroutine(SetGameplay());
     }
 
     IEnumerator SetGameplay()
@@ -203,7 +235,7 @@ public class PowerUpManager : MonoBehaviour
 
         while (Time.timeScale < 1)
         {
-            Time.timeScale += 2 * Time.deltaTime;
+            Time.timeScale += 4*Time.deltaTime;
             yield return null;
         }
 

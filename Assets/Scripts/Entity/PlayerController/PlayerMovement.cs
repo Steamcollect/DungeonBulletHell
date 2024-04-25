@@ -5,10 +5,12 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     public float moveSpeed;
+    public float inertie;
 
     bool isPaused = false;
 
     Vector2 moveInput;
+    Vector2 inertieVelocity;
 
     SpriteRenderer graphics;
     Rigidbody2D rb;
@@ -42,15 +44,18 @@ public class PlayerMovement : MonoBehaviour
         moveInput.x = Input.GetAxisRaw("Horizontal");
         moveInput.y = Input.GetAxisRaw("Vertical");
         moveInput.Normalize();
+
+        inertieVelocity.x = Mathf.Lerp(inertieVelocity.x, moveInput.x, inertie);
+        inertieVelocity.y = Mathf.Lerp(inertieVelocity.y, moveInput.y, inertie);
     }
     void Move()
     {
-        rb.velocity = moveInput * moveSpeed * Time.deltaTime;
+        rb.velocity = inertieVelocity * moveSpeed * Time.deltaTime;
     }
 
     void SetAnimation()
     {
-        anim.SetFloat("Velocity", Mathf.Abs(rb.velocity.x) + Mathf.Abs(rb.velocity.y));
+        anim.SetFloat("Velocity", Mathf.Abs(moveInput.normalized.x) + Mathf.Abs(moveInput.normalized.y));
         if (rb.velocity.x < -.1) graphics.flipX = true;
         else if (rb.velocity.x > .1) graphics.flipX = false;
     }

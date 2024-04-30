@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(EntityState))]
 public abstract class Enemy : MonoBehaviour
 {
     public Transform playerTransform;
@@ -15,7 +16,14 @@ public abstract class Enemy : MonoBehaviour
     public float moveSpeed;
     public float attackCooldown;
 
-    [HideInInspector]public bool canAttack = true;
+    [HideInInspector] public bool canAttack = true;
+
+    [HideInInspector] public EntityState entityState;
+
+    private void Awake()
+    {
+        entityState = GetComponent<EntityState>();
+    }
 
     public abstract void OnUpdate();
 

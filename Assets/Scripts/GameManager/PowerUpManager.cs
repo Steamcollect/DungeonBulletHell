@@ -197,7 +197,15 @@ public class PowerUpManager : MonoBehaviour
                 break;
             case PowerUpType.CircleSpeedEvolution:
                 circleOrbe.rotationSpeed += 10;
-                break;        
+                break;
+
+            case PowerUpType.FrozenMana:
+                playerCombat.bulletUpgrades.Add(PowerUpType.FrozenMana);
+                break;
+            case PowerUpType.FrozenHeart:
+                playerCombat.bulletUpgrades.Add(PowerUpType.FrozenHeart);
+                break;
+
         }
 
         // Remove power up if max utilisation exceeded

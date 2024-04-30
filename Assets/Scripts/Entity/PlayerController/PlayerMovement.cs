@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     public float moveSpeed;
-    public float inertie;
+    public float friction;
 
     bool isPaused = false;
 
@@ -36,6 +36,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (isPaused) return;
 
+
         Move();
     }
 
@@ -45,8 +46,8 @@ public class PlayerMovement : MonoBehaviour
         moveInput.y = Input.GetAxisRaw("Vertical");
         moveInput.Normalize();
 
-        inertieVelocity.x = Mathf.Lerp(inertieVelocity.x, moveInput.x, inertie);
-        inertieVelocity.y = Mathf.Lerp(inertieVelocity.y, moveInput.y, inertie);
+        inertieVelocity.x = Mathf.Lerp(inertieVelocity.x, moveInput.x, friction);
+        inertieVelocity.y = Mathf.Lerp(inertieVelocity.y, moveInput.y, friction);
     }
     void Move()
     {

@@ -885,6 +885,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: c8507b9bc4b43d94399d3890f55204c9, type: 2}
   - {fileID: 11400000, guid: f84bd5dff9ddbdf469df70d41dfd686a, type: 2}
   - {fileID: 11400000, guid: fbc553486174a6a489d0fd786a7421f8, type: 2}
+  - {fileID: 11400000, guid: af7b0bdf0d0b22c458c6e21b8f7b594c, type: 2}
   choicesCount: 2
   choiceUiParent: {fileID: 1453699962}
   choiceUiGO: {fileID: 1291394478261017401, guid: 722ec717c672e5147b1475f7e6d2a047, type: 3}
@@ -1096,12 +1097,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackCooldown: 1
   bulletSpeed: 5
-  attackDamage: 5
+  attackDamage: 0
   targetTag: Enemy
   handParent: {fileID: 1452802975}
   attackPoint: {fileID: 418592051}
   handAnim: {fileID: 97349859}
-  bulletUpgrades: 
+  bulletUpgrades: 1500000016000000
   heatSeekingBulletDetectionRange: 1
 --- !u!114 &181236287
 MonoBehaviour:
@@ -1116,7 +1117,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 200
-  inertie: 0.05
+  friction: 0.05
 --- !u!114 &181236288
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1686,6 +1687,63 @@ Transform:
   - {fileID: 97349857}
   m_Father: {fileID: 1452802975}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
+--- !u!1001 &439026212
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1660158575105509931, guid: 9646cb0a59fec9140a32c4a7337fe751, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 2.9105282
+      objectReference: {fileID: 0}
+    - target: {fileID: 1660158575105509931, guid: 9646cb0a59fec9140a32c4a7337fe751, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.56113464
+      objectReference: {fileID: 0}
+    - target: {fileID: 1660158575105509931, guid: 9646cb0a59fec9140a32c4a7337fe751, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1660158575105509931, guid: 9646cb0a59fec9140a32c4a7337fe751, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1660158575105509931, guid: 9646cb0a59fec9140a32c4a7337fe751, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1660158575105509931, guid: 9646cb0a59fec9140a32c4a7337fe751, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1660158575105509931, guid: 9646cb0a59fec9140a32c4a7337fe751, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1660158575105509931, guid: 9646cb0a59fec9140a32c4a7337fe751, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1660158575105509931, guid: 9646cb0a59fec9140a32c4a7337fe751, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1660158575105509931, guid: 9646cb0a59fec9140a32c4a7337fe751, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2358769753141210286, guid: 9646cb0a59fec9140a32c4a7337fe751, type: 3}
+      propertyPath: m_Name
+      value: Goblin
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 9646cb0a59fec9140a32c4a7337fe751, type: 3}
 --- !u!1 &447668447
 GameObject:
   m_ObjectHideFlags: 0
@@ -1703,7 +1761,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &447668448
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1743,7 +1801,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 447668447}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 40af585e1ac83e3458d328926145a37b, type: 3}
   m_Name: 
@@ -78336,3 +78394,4 @@ SceneRoots:
   - {fileID: 1110731028}
   - {fileID: 2069107070}
   - {fileID: 1906706551}
+  - {fileID: 439026212}

@@ -41,4 +41,6 @@ public enum PowerUpType
     RuneOfAgility, RuneOfAgilityII, RuneOfAgilityIII, RuneOfAgilityIV,
 
     MagicCircle, CircleOrbEvolution, CircleSpeedEvolution, CircleRangeEvolution,
+
+    FrozenMana, FrozenHeart,
 }

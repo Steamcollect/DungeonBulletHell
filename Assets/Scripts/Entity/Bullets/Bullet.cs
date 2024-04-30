@@ -21,6 +21,8 @@ public abstract class Bullet : MonoBehaviour
     
     [HideInInspector] public float heatSeekingBulletDetectionRange;
 
+    bool canSlow = false;
+    bool canFreez = false;
 
     public abstract void OnMove();
 
@@ -28,7 +30,18 @@ public abstract class Bullet : MonoBehaviour
     {
         if (collision.CompareTag(targetTag))
         {
+            Collision(collision.gameObject);
             OnCollision(collision.gameObject);
+        }
+    }
+    void Collision(GameObject hit)
+    {
+        EntityState hitState = hit.GetComponent<EntityState>();
+
+        if (canSlow)
+        {
+            if (canFreez && hitState.GetState() == EntityStateExisting.Slow) hitState.SetFrozenStun(1.5f);
+            else hitState.SetFrozenSlow(3);
         }
     }
     public abstract void OnCollision(GameObject hit);
@@ -45,7 +58,7 @@ public abstract class Bullet : MonoBehaviour
     }
     IEnumerator SetupUpgrade(List<PowerUpType> upgradesType)
     {
-        yield return new WaitForSeconds(.8f);
+        yield return new WaitForSeconds(.3f);
 
         foreach (PowerUpType current in upgradesType)
         {
@@ -59,6 +72,13 @@ public abstract class Bullet : MonoBehaviour
                         upgrades.Add(tmp);
                     }
                     break;
+
+                case PowerUpType.FrozenMana:
+                    canSlow = true;
+                    break;
+                case PowerUpType.FrozenHeart:
+                    canFreez = true;
+                    break;                    
             }
         }
     }

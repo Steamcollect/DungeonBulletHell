@@ -19,6 +19,8 @@ public class BasicRangeEnemy : Enemy
     
     public override void OnUpdate()
     {
+        if (entityState.currentState == EntityStateExisting.Stun) return;
+
         float distanceFromPlayer = Vector2.Distance(transform.position, playerTransform.position);
 
         if (distanceFromPlayer < attackRange)
@@ -28,7 +30,7 @@ public class BasicRangeEnemy : Enemy
         }
         else
         {
-            transform.position = Vector2.SmoothDamp(transform.position, playerTransform.position, ref velocity, distanceFromPlayer / moveSpeed);
+            transform.position = Vector2.SmoothDamp(transform.position, playerTransform.position, ref velocity, distanceFromPlayer / entityState.CalculateMoveSpeed(moveSpeed));
         }
 
         SetHandVisual();

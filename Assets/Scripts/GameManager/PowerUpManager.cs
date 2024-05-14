@@ -21,6 +21,8 @@ public class PowerUpManager : MonoBehaviour
     public GameObject laserGolemGO;
     public OrbeCircle circleOrbe;
 
+    float probLegendary = 5, probEpic = 15, probRare = 40;
+
     PlayerMovement playerMovement;
     PlayerCombat playerCombat;
     PlayerHealth playerHealth;
@@ -57,34 +59,32 @@ public class PowerUpManager : MonoBehaviour
             PowerUpData current = null;
             int rnd = Random.Range(0, 100);
 
-            switch (rnd)
+            if(rnd <= probLegendary)
             {
-                case <= 5:
-                    // Legendary
-                    currentsRaritySelected = currentsPowerUp.Where(elem => elem.rarity == PowerUpRarity.Legendary).ToList();
-                    SetCurrentChoice();
-                    break;
-
-                case <= 15:
-                    // Epic
-                    currentsRaritySelected = currentsPowerUp.Where(elem => elem.rarity == PowerUpRarity.Epic).ToList();
-                    SetCurrentChoice();
-                    break;
-
-                case <= 40:
-                    // Rare
-                    currentsRaritySelected = currentsPowerUp.Where(elem => elem.rarity == PowerUpRarity.Rare).ToList();
-                    SetCurrentChoice();
-                    break;
-
-                default:
-                    // Common
-                    currentsRaritySelected = currentsPowerUp.Where(elem => elem.rarity == PowerUpRarity.Common).ToList();
-                    SetCurrentChoice();
-                    break;
+                // Legendary
+                currentsRaritySelected = currentsPowerUp.Where(elem => elem.rarity == PowerUpRarity.Legendary).ToList();
+                SetCurrentChoice(PowerUpRarity.Legendary);
+            }
+            else if (rnd <= probEpic)
+            {
+                // Epic
+                currentsRaritySelected = currentsPowerUp.Where(elem => elem.rarity == PowerUpRarity.Epic).ToList();
+                SetCurrentChoice(PowerUpRarity.Epic);
+            }
+            else if(rnd <= probRare)
+            {
+                // Rare
+                currentsRaritySelected = currentsPowerUp.Where(elem => elem.rarity == PowerUpRarity.Rare).ToList();
+                SetCurrentChoice(PowerUpRarity.Rare);
+            }
+            else
+            {
+                // Common
+                currentsRaritySelected = currentsPowerUp.Where(elem => elem.rarity == PowerUpRarity.Common).ToList();
+                SetCurrentChoice(PowerUpRarity.Common);
             }
 
-            void SetCurrentChoice()
+            void SetCurrentChoice(PowerUpRarity rarity)
             {
                 if (currentsRaritySelected.Count <= 0)
                 {
@@ -96,6 +96,21 @@ public class PowerUpManager : MonoBehaviour
 
                     current = currentsRaritySelected.GetRandom();
                     choicesUI[i].SetChoiceVisual(current);
+
+                    switch(rarity)
+                    {
+                        case PowerUpRarity.Common:
+                            probLegendary += 1.5f;
+                            probEpic += 4;
+                            probRare += 8;
+                            break;
+
+                        default:
+                            probLegendary = 5;
+                            probEpic = 15;
+                            probRare = 40;
+                            break;
+                    }
                 }
             }
 
